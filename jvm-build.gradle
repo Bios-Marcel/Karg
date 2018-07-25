@@ -1,0 +1,59 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    ext.kotlin_version = '1.2.51'
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+wrapper {
+    gradleVersion = '4.9'
+}
+
+//IDEs
+apply plugin: 'idea'
+
+// Kotlin
+apply plugin: 'kotlin'
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    //Kotlin stdlib
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}
+
+task createTestableJar(type: Jar) {
+	manifest {
+        attributes 'Main-Class': 'TestSuiteKt'
+    }
+    baseName = 'TestSuite'
+    from sourceSets.main.output, 
+    	sourceSets.test.output,
+    	configurations.compile.collect {
+    		it.isDirectory() ? it : zipTree(it)
+    	}
+    with jar
+}
+
+task tests(type: Exec) {
+	dependsOn 'createTestableJar'
+	commandLine 'java', '-jar', 'build/libs/TestSuite.jar'
+}

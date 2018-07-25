@@ -1,0 +1,32 @@
+buildscript {
+   repositories {
+       mavenCentral()
+       maven {
+           url  "https://dl.bintray.com/jetbrains/kotlin-native-dependencies"
+       }
+   }
+
+   dependencies {
+       classpath "org.jetbrains.kotlin:kotlin-native-gradle-plugin:+"
+   }
+}
+
+apply plugin: 'konan'
+
+konanArtifacts {
+	library('hello') {
+		srcFiles fileTree('src/main/kotlin')
+	}
+
+	program('tests') {
+		srcFiles fileTree('src/test/kotlin')
+		libraries {
+			artifact 'hello'
+		}
+	}
+}
+
+task tests(type: Exec) {
+	dependsOn 'build'
+	commandLine './build/konan/bin/linux_x64/tests.kexe'
+}
