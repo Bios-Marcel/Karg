@@ -11,8 +11,7 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-install:
+install:false
+script:
   - ./gradlew -b jvm-build.gradle tests
   - ./gradlew -b native-build.gradle tests
-# Omit ./gradlew check
-build:
