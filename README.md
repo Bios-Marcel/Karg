@@ -1,5 +1,7 @@
 # Karg
 
+![Travis Build for branch master](https://travis-ci.org/Bios-Marcel/Karg.svg?branch=master)
+
 ## What is this?
 
 `Karg` is supposed to be a library for command line arguments, that works for both kotlin-native and kotlin-jvm.
