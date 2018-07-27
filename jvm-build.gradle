@@ -38,6 +38,8 @@ repositories {
 dependencies {
     //Kotlin stdlib
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    //Kotlin reflection library
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }
 
 sourceSets {
@@ -54,7 +56,7 @@ sourceSets {
 
 task createTestableJar(type: Jar) {
 	manifest {
-        attributes 'Main-Class': 'TestSuiteKt'
+        attributes 'Main-Class': 'KargTestsKt'
     }
     baseName = 'TestSuite'
     from sourceSets.main.output, 

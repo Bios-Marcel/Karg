@@ -1,12 +1,17 @@
 package com.msc.karg
 
-object TestHelloPrinter: Test(){
+class TestHelloPrinter : Test() {
 
-	override fun run() {
-		testHelloPrinter()
-	}
-	
-	fun testHelloPrinter() {
-	    assertEquals("Example", "Hello", "Hello");
-	}
+    override fun registerTestFunctions() {
+        registerTestFunction(this::testHelloPrinter)
+        registerTestFunction(this::testFailure)
+    }
+
+    fun testHelloPrinter() {
+        assertEquals("Hello", "Hello");
+    }
+
+    fun testFailure() {
+        fail()
+    }
 }
