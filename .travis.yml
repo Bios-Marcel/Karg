@@ -5,3 +5,5 @@ jdk:
 install:
   - ./gradlew -b jvm-build.gradle tests
   - ./gradlew -b native-build.gradle tests
+# Omit check
+check:
