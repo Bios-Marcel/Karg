@@ -3,6 +3,8 @@ language: java
 jdk:
   - openjdk8
 before_install:
+  - sudo apt update
+  - sudo apt install snapd
   - sudo snap install kotlin-native
   - sudo snap install kotlin
 install:
