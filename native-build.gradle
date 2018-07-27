@@ -18,10 +18,15 @@ konanArtifacts {
 		srcFiles fileTree('src/main/kotlin')
 	}
 
+	library('testlib') {
+		srcFiles fileTree('src/testlib/kotlin')
+	}
+
 	program('tests') {
 		srcFiles fileTree('src/test/kotlin')
 		libraries {
 			artifact 'hello'
+			artifact 'testlib'
 		}
 	}
 }

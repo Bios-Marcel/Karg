@@ -1,12 +1,12 @@
 package com.msc.karg
 
-object TestHelloPrinter: Test {
+object TestHelloPrinter: Test(){
 
 	override fun run() {
 		testHelloPrinter()
 	}
 	
 	fun testHelloPrinter() {
-		assert("Hello".equals(HelloPrinter.returnHello()))		
+	    assertEquals("Example", "Hello", "Hello");
 	}
 }

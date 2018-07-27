@@ -1,0 +1,10 @@
+sudo: required
+language: java
+jdk:
+  - openjdk8
+before_script:
+  - sudo snap install kotlin-native
+  - sudo snap install kotlin
+script:
+  - ./gradlew -b jvm-build.gradle tests
+  - ./gradlew -b native-build.gradle tests

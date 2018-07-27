@@ -40,6 +40,18 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
 
+sourceSets {
+    testlib {
+        kotlin {
+            //Little hack in order to not lose the dependencies, I should find a better way.
+            compileClasspath += sourceSets.main.compileClasspath                       
+        }
+    }
+    test {
+        compileClasspath += sourceSets.testlib.output
+    }
+}
+
 task createTestableJar(type: Jar) {
 	manifest {
         attributes 'Main-Class': 'TestSuiteKt'
@@ -47,6 +59,7 @@ task createTestableJar(type: Jar) {
     baseName = 'TestSuite'
     from sourceSets.main.output, 
     	sourceSets.test.output,
+    	sourceSets.testlib.output,
     	configurations.compile.collect {
     		it.isDirectory() ? it : zipTree(it)
     	}
